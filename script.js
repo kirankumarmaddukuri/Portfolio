@@ -1,28 +1,40 @@
-<script>
-function validateForm() {
-  let name = document.getElementById('name').value;
-  let email = document.getElementById('email').value;
-  let message = document.getElementById('message').value;
-  let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+document.addEventListener('DOMContentLoaded', function() 
+{
+  document.querySelector('form').addEventListener('submit', function(event) 
+  {
+    event.preventDefault(); 
 
-  if (name == "") {
-    alert("Name must be filled out");
-    return false;
-  }
+    
+    const name = document.querySelector('input[name="Name"]').value;
+    const email = document.querySelector('input[name="email"]').value;
+    const message = document.querySelector('textarea[name="Meassage"]').value;
 
-  if (email == "") {
-    alert("Email must be filled out");
-    return false;
-  } else if (!emailPattern.test(email)) {
-    alert("Please enter a valid email address");
-    return false;
-  }
+    let valid = true;
 
-  if (message == "") {
-    alert("Message must be filled out");
-    return false;
-  }
+   
+    if (name.trim() === "") {
+      alert("Please enter your name.");
+      valid = false;
+    }
 
-  return true;
-}
-</script>
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email.trim() === "") {
+      alert("Please enter your email.");
+      valid = false;
+    } else if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address.");
+      valid = false;
+    }
+
+    
+    if (message.trim() === "") {
+      alert("Please enter your message.");
+      valid = false;
+    }
+
+    
+    if (valid) {
+      this.submit();
+    }
+  });
+});
