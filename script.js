@@ -1,40 +1,34 @@
-document.addEventListener('DOMContentLoaded', function() 
-{
-  document.querySelector('form').addEventListener('submit', function(event) 
-  {
-    event.preventDefault(); 
+function validateForm() {
+  
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var message = document.getElementById("message").value;
 
-    
-    const name = document.querySelector('input[name="Name"]').value;
-    const email = document.querySelector('input[name="email"]').value;
-    const message = document.querySelector('textarea[name="Meassage"]').value;
+  if (name == "") 
+    {
+    alert("Name must be filled out");
+    return false;
+  }
 
-    let valid = true;
+  
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address");
+    return false;
+  }
 
-   
-    if (name.trim() === "") {
-      alert("Please enter your name.");
-      valid = false;
-    }
+ 
+  if (message == "") 
+    {
+    alert("Message must be filled out");
+    return false;
+  }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email.trim() === "") {
-      alert("Please enter your email.");
-      valid = false;
-    } else if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address.");
-      valid = false;
-    }
+  alert("Form submitted successfully!");
+  return true;
+}
 
-    
-    if (message.trim() === "") {
-      alert("Please enter your message.");
-      valid = false;
-    }
 
-    
-    if (valid) {
-      this.submit();
-    }
-  });
-});
+document.forms[0].onsubmit = function() {
+  return validateForm();
+};
